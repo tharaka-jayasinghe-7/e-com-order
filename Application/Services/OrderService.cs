@@ -91,4 +91,19 @@ public class OrderService
     {
         return await _repository.DeleteOrderAsync(id);
     }
+    
+    public async Task<IEnumerable<OrderDto>> GetOrdersByUserIdAsync(string userId)
+    {
+        var orders = await _repository.GetOrdersByUserIdAsync(userId);
+        return orders.Select(o => new OrderDto
+        {
+            Id = o.Id,
+            UserId = o.UserId,
+            ProductIds = o.ProductIds,
+            TotalAmount = o.TotalAmount,
+            Status = o.Status
+        });
+    }
+    
+    
 }

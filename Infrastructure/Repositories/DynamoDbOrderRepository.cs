@@ -46,4 +46,15 @@ public class DynamoDbOrderRepository : IOrderRepository
         await _context.DeleteAsync(order);
         return true;
     }
+    
+    public async Task<IEnumerable<Order>> GetOrdersByUserIdAsync(string userId)
+    {
+        // Using Scan with a condition
+        var search = _context.ScanAsync<Order>(new List<ScanCondition>
+        {
+            new ScanCondition("UserId", ScanOperator.Equal, userId)
+        });
+
+        return await search.GetRemainingAsync();
+    }
 }

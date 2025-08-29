@@ -84,3 +84,33 @@ Resources:
           Properties:
             Path: /order/{id}
             Method: DELETE
+            
+  # ----- GET ALL ORDERS -----
+  GetAllOrdersFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: GetAllOrdersLambda
+      Handler: OrderServiceLambda::OrderServiceLambda.Functions.GetAllOrdersFunction::FunctionHandlerAsync
+      Policies:
+        - AmazonDynamoDBFullAccess
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /orders
+            Method: GET
+  
+    # ----- GET ORDERS BY USER ID -----
+  GetUserOrdersFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: GetUserOrdersLambda
+      Handler: OrderServiceLambda::OrderServiceLambda.Functions.GetUserOrdersFunction::FunctionHandlerAsync
+      Policies:
+        - AmazonDynamoDBFullAccess
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /orders/user/{userId}
+            Method: GET
