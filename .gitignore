@@ -1,0 +1,33 @@
+# Build folders
+bin/
+obj/
+
+# Rider
+.idea/
+*.sln.iml
+
+# User-specific files
+*.user
+*.suo
+
+# VS Code settings (if any)
+.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# NuGet packages folder
+packages/
+
+# Dotnet tool manifest
+.dotnet_tools/
+
+# JetBrains Rider workspace and caches
+.idea/
+.idea/**/*
+*.sln.iml
+aches/

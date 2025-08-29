@@ -1,0 +1,86 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Order Service with Lambda, API Gateway, and DynamoDB (Full CRUD)
+
+Globals:
+  Function:
+    Runtime: dotnet8
+    MemorySize: 512
+    Timeout: 30
+    Architectures:
+      - x86_64
+
+Resources:
+
+  OrdersTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: Orders
+      AttributeDefinitions:
+        - AttributeName: Id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: Id
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+
+  # ----- CREATE ORDER -----
+  AddOrderFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: AddOrderLambda
+      Handler: OrderServiceLambda::OrderServiceLambda.Functions.AddOrderFunction::FunctionHandlerAsync
+      Policies:
+        - AmazonDynamoDBFullAccess
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /order
+            Method: POST
+
+  # ----- GET ORDER BY ID -----
+  GetOrderFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: GetOrderLambda
+      Handler: OrderServiceLambda::OrderServiceLambda.Functions.GetOrderFunction::FunctionHandlerAsync
+      Policies:
+        - AmazonDynamoDBFullAccess
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /order/{id}
+            Method: GET
+
+
+  # ----- UPDATE ORDER -----
+  UpdateOrderFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: UpdateOrderLambda
+      Handler: OrderServiceLambda::OrderServiceLambda.Functions.UpdateOrderFunction::FunctionHandlerAsync
+      Policies:
+        - AmazonDynamoDBFullAccess
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /order/{id}
+            Method: PUT
+
+  # ----- DELETE ORDER -----
+  DeleteOrderFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: DeleteOrderLambda
+      Handler: OrderServiceLambda::OrderServiceLambda.Functions.DeleteOrderFunction::FunctionHandlerAsync
+      Policies:
+        - AmazonDynamoDBFullAccess
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /order/{id}
+            Method: DELETE

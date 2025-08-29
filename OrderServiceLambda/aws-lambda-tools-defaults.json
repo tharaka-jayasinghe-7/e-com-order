@@ -1,0 +1,14 @@
+{
+  "Information": [
+    "This file is used to configure the AWS .NET Lambda deployment command",
+    "You can override settings here when running 'dotnet lambda deploy-serverless'"
+  ],
+  "profile": "default",
+  "region": "us-east-1",
+  "configuration": "Release",
+  "framework": "net8.0",
+  "function-runtime": "dotnet8",
+  "template": "serverless.template",
+  "s3-bucket": "my-lambda-s3-ecom-order",
+  "stack-name": "my-lambda-s3-ecom-order"
+}
