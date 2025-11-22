@@ -20,7 +20,19 @@ public class OrderService
             UserId = dto.UserId,
             ProductIds = dto.ProductIds,
             TotalAmount = dto.TotalAmount,
-            Status = "Pending"
+            Status = string.IsNullOrEmpty(dto.Status) ? "Pending" : dto.Status,
+            CreatedAt = dto.CreatedAt == default ? DateTime.UtcNow : dto.CreatedAt,
+
+            FirstName = dto.FirstName,
+            LastName = dto.LastName,
+            Email = dto.Email,
+            PhoneNumber = dto.PhoneNumber,
+
+            Address = dto.Address,
+            City = dto.City,
+            PostalCode = dto.PostalCode,
+
+            PaymentMethod = dto.PaymentMethod
         };
 
         var created = await _repository.AddOrderAsync(order);
@@ -31,7 +43,19 @@ public class OrderService
             UserId = created.UserId,
             ProductIds = created.ProductIds,
             TotalAmount = created.TotalAmount,
-            Status = created.Status
+            Status = created.Status,
+            CreatedAt = created.CreatedAt,
+
+            FirstName = created.FirstName,
+            LastName = created.LastName,
+            Email = created.Email,
+            PhoneNumber = created.PhoneNumber,
+
+            Address = created.Address,
+            City = created.City,
+            PostalCode = created.PostalCode,
+
+            PaymentMethod = created.PaymentMethod
         };
     }
 
@@ -46,7 +70,19 @@ public class OrderService
             UserId = order.UserId,
             ProductIds = order.ProductIds,
             TotalAmount = order.TotalAmount,
-            Status = order.Status
+            Status = order.Status,
+            CreatedAt = order.CreatedAt,
+
+            FirstName = order.FirstName,
+            LastName = order.LastName,
+            Email = order.Email,
+            PhoneNumber = order.PhoneNumber,
+
+            Address = order.Address,
+            City = order.City,
+            PostalCode = order.PostalCode,
+
+            PaymentMethod = order.PaymentMethod
         };
     }
 
@@ -59,7 +95,19 @@ public class OrderService
             UserId = o.UserId,
             ProductIds = o.ProductIds,
             TotalAmount = o.TotalAmount,
-            Status = o.Status
+            Status = o.Status,
+            CreatedAt = o.CreatedAt,
+
+            FirstName = o.FirstName,
+            LastName = o.LastName,
+            Email = o.Email,
+            PhoneNumber = o.PhoneNumber,
+
+            Address = o.Address,
+            City = o.City,
+            PostalCode = o.PostalCode,
+
+            PaymentMethod = o.PaymentMethod
         });
     }
 
@@ -71,7 +119,19 @@ public class OrderService
             UserId = dto.UserId,
             ProductIds = dto.ProductIds,
             TotalAmount = dto.TotalAmount,
-            Status = dto.Status
+            Status = dto.Status,
+            CreatedAt = dto.CreatedAt == default ? DateTime.UtcNow : dto.CreatedAt,
+
+            FirstName = dto.FirstName,
+            LastName = dto.LastName,
+            Email = dto.Email,
+            PhoneNumber = dto.PhoneNumber,
+
+            Address = dto.Address,
+            City = dto.City,
+            PostalCode = dto.PostalCode,
+
+            PaymentMethod = dto.PaymentMethod
         };
 
         var updated = await _repository.UpdateOrderAsync(order);
@@ -83,7 +143,19 @@ public class OrderService
             UserId = updated.UserId,
             ProductIds = updated.ProductIds,
             TotalAmount = updated.TotalAmount,
-            Status = updated.Status
+            Status = updated.Status,
+            CreatedAt = updated.CreatedAt,
+
+            FirstName = updated.FirstName,
+            LastName = updated.LastName,
+            Email = updated.Email,
+            PhoneNumber = updated.PhoneNumber,
+
+            Address = updated.Address,
+            City = updated.City,
+            PostalCode = updated.PostalCode,
+
+            PaymentMethod = updated.PaymentMethod
         };
     }
 
@@ -101,7 +173,19 @@ public class OrderService
             UserId = o.UserId,
             ProductIds = o.ProductIds,
             TotalAmount = o.TotalAmount,
-            Status = o.Status
+            Status = o.Status,
+            CreatedAt = o.CreatedAt,
+
+            FirstName = o.FirstName,
+            LastName = o.LastName,
+            Email = o.Email,
+            PhoneNumber = o.PhoneNumber,
+
+            Address = o.Address,
+            City = o.City,
+            PostalCode = o.PostalCode,
+
+            PaymentMethod = o.PaymentMethod
         });
     }
     
