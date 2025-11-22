@@ -49,12 +49,9 @@ public class DynamoDbOrderRepository : IOrderRepository
     
     public async Task<IEnumerable<Order>> GetOrdersByUserIdAsync(string userId)
     {
-        // Using Scan with a condition
-        var search = _context.ScanAsync<Order>(new List<ScanCondition>
-        {
-            new ScanCondition("UserId", ScanOperator.Equal, userId)
-        });
-
+        // Query the UserId GSI for better performance than Scan
+        var config = new DynamoDBOperationConfig { IndexName = "UserId-index" };
+        var search = _context.QueryAsync<Order>(userId, config);
         return await search.GetRemainingAsync();
     }
 }

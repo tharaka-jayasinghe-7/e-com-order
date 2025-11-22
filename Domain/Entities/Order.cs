@@ -6,6 +6,7 @@ public class Order
 {
     [DynamoDBHashKey]
     public string Id { get; set; } = Guid.NewGuid().ToString();
+    [DynamoDBGlobalSecondaryIndexHashKey("UserId-index")] // allow querying by UserId via GSI
     public string UserId { get; set; } = string.Empty;
     public List<string> ProductIds { get; set; } = new();
     public decimal TotalAmount { get; set; }
